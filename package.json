@@ -1,0 +1,16 @@
+{
+  "name": "trie-string-sort",
+  "version": "1.0.0",
+  "description": "sort strings by putting them into a trie",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "trie",
+    "string",
+    "sort"
+  ],
+  "author": "Peter Squicciarini <stripedpajamas273@gmail.com>",
+  "license": "MIT"
+}
