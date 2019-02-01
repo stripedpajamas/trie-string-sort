@@ -1,25 +1,10 @@
-const TrieNode = require('./Trie')
+const Trie = require('./Trie')
 
-function insert (root, key, value) {
-  let node = root
-  for (let c of key) {
-    let n = c.charCodeAt(0)
-    if (!node.children[n]) {
-      node.children[n] = new TrieNode()
-    }
-    node = node.children[n]
-  }
-  node.value = value
-}
-
-function traversePreorder (root, visit) {
-  if (!root) return
-  visit(root)
-  for (let child of root.children) {
-    traversePreorder(child, visit)
-  }
-}
-
+/**
+ * Returns a function that pushes value of node to the input array
+ * @param {array} output the array all node values should be pushed to
+ * @returns {function}
+ */
 function collector (output = []) {
   return function collect (node) {
     if (!node.value) return
@@ -27,16 +12,22 @@ function collector (output = []) {
   }
 }
 
+/**
+ * Adds all strings to a trie
+ * Preorder traverses trie
+ * Collects sorted output strings
+ * @param {array} strings an array of strings to sort lexicographically
+ */
 function sortStrings (strings) {
-  const root = new TrieNode()
   // put all strings into a trie
+  const trie = new Trie()
   for (let s of strings) {
-    insert(root, s, s)
+    trie.insert(s, s)
   }
+  // traverse the trie in preorder and collect leaf values
   const output = []
   const collect = collector(output)
-  // traverse the trie in preorder and collect leaf values
-  traversePreorder(root, collect)
+  trie.traversePreorder(collect)
   return output
 }
 
